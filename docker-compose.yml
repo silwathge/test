@@ -1,19 +1,19 @@
-version: '3.7'
+version: '3.3'
 services:
-#  global-api-marketplace-app:
-#    #image: kapilas/global-api-marketplace-app:0.0.1-SNAPSHOT
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    ports:
-#      - "8080:8080"
-#    restart: always
-#    depends_on: 
-#      - api-postgres 
-#    environment:
-#      POSTGRES_HOST: api-postgres     
-#    networks:
-#      - global-api-marketplace-app-network
+  global-api-marketplace-app:
+#    image: kapilas/global-api-marketplace-app:0.0.1-SNAPSHOT
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on: 
+      - api-postgres 
+    environment:
+      POSTGRES_HOST: api-postgres     
+    networks:
+      - global-api-marketplace-app-network
 
   api-postgres:
     image: postgres:11
