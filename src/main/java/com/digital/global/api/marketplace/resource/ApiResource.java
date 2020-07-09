@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.digital.global.api.marketplace.FileStorageService;
 import com.digital.global.api.marketplace.entity.ApiDocument;
 import com.digital.global.api.marketplace.entity.PublisherUser;
+import com.digital.global.api.marketplace.exception.UploadedFileFormatException;
 import com.digital.global.api.marketplace.repository.ApiDcoumentRepository;
 import com.digital.global.api.marketplace.repository.PublisherUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.swagger.v3.parser.OpenAPIV3Parser;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -29,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ApiResource {
 
 	@Autowired
-	private MessageSource messageBundle;
+	private FileStorageService fileStorageService;
 
 	@Autowired
 	private PublisherUserRepository publisherRepo;
@@ -37,52 +40,45 @@ public class ApiResource {
 	@Autowired
 	private ApiDcoumentRepository apiRepo;
 
-	/*
-	 * @Autowired(required = true) private PasswordEncoder bcryptEncoder;
-	 */
-
 	@PostMapping(value = "/v1/publishers/{name}/apis", consumes = { "multipart/form-data" })
 
 	public ResponseEntity<Object> createApi(@PathVariable String name,
 			@RequestParam("file") MultipartFile file) {
 
 		PublisherUser publisher = publisherRepo.findByUsername(name);
-		// exception hadling
 
-		// OpenAPI openAPI = new OpenAPIV3Parser().read(file.getBytes().toString());
+		if (null == publisher) {
+			throw new UsernameNotFoundException("No Publisher by the given name");
+		}
 
 		ObjectMapper Obj = new ObjectMapper();
 
 		String jsonStr = "";
-		// OpenAPI openAPI;
 		try {
-			// openAPI = new OpenAPIV3Parser().read(new String(file.getBytes()));
 			jsonStr = Obj.writeValueAsString(new String(file.getBytes()));
 
-		} catch (IOException e) {
-			log.error("" + e);
+		} catch (RuntimeException | IOException e) {
+			throw new UploadedFileFormatException("File is not a JSON file");
+		}
+
+		if (null == jsonStr || "".equals(jsonStr)) {
+			throw new UploadedFileFormatException("Can not find a file");
+		}
+
+		try {
+			String fileName = fileStorageService.storeFile(file);
+			new OpenAPIV3Parser().read(fileName);
+		} catch (Error | RuntimeException e) {
+			throw new UploadedFileFormatException("File is not a valid OpenAPI document file");
 		}
 
 		ApiDocument savedDoc = apiRepo.save(new ApiDocument("developer", jsonStr, false, publisher));
-
-		System.out.println(jsonStr);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(savedDoc.getId()).toUri();
 
 		return ResponseEntity.created(location).build();
 
-		// String fileName = fileStorageService.storeFile(file);
-
-		/*
-		 * String fileDownloadUri =
-		 * ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/")
-		 * .path(fileName).toUriString();
-		 */
-		/*
-		 * return new Response(fileName, fileDownloadUri, file.getContentType(),
-		 * file.getSize());
-		 */
 	}
 
 	@GetMapping("/test")

@@ -16,7 +16,7 @@ public class DBFileStorageService {
 	 * FileStorageException("Sorry! Filename contains invalid path sequence " +
 	 * fileName); }
 	 * 
-	 * //ApiDocument dbFile = new ApiDocument(fileName, file.getContentType(),
+	 * ApiDocument dbFile = new ApiDocument(fileName, file.getContentType(),
 	 * file.getBytes());
 	 * 
 	 * //return dbFileRepository.save(dbFile); } catch (IOException ex) { throw new
