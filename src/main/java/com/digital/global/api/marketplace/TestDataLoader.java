@@ -24,22 +24,11 @@ public class TestDataLoader implements ApplicationRunner {
 
 	public void run(ApplicationArguments args) {
 
-		PublisherUser publisher = publisherRepo.save(new PublisherUser("username1",
-				bcryptEncoder.encode("password1"), "kapila@kapila.com", false));
-
-		/*
-		 * Swagger swagger = new
-		 * SwaggerParser().read("http://petstore.swagger.io/v2/swagger.json");
-		 *//*
-			 * System.out.println(openAPI.getPaths());
-			 * System.out.println(openAPI.getComponents());
-			 * System.out.println(openAPI.getExtensions());
-			 * System.out.println(openAPI.getExternalDocs());
-			 * System.out.println(openAPI.getInfo());
-			 * System.out.println(openAPI.getPaths());
-			 */
-
-		/* apiRepo.save(new ApiDocument("developer", null, false, publisher)); */
+		PublisherUser testUserInDB = publisherRepo.findByUsername("username");
+		if (null == testUserInDB) {
+			PublisherUser publisher = publisherRepo.save(new PublisherUser("username",
+					bcryptEncoder.encode("password"), "kapila@kapila.com", false));
+		}
 
 	}
 }

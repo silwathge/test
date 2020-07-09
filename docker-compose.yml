@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+  global-api-marketplace-app:
+    #image: kapilas/global-api-marketplace-app:0.0.1-SNAPSHOT
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on: 
+      - api-postgres 
+    environment:
+      POSTGRES_HOST: api-postgres     
+    networks:
+      - global-api-marketplace-app-network
+
+  api-postgres:
+    image: postgres:11
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_DB: apiportaldb
+      POSTGRES_PASSWORD: mysecretpassword      
+      POSTGRES_USER: postgres
+    volumes:
+      - postgres-database-data-volume:/var/lib/postgresql/data
+    networks:
+      - global-api-marketplace-app-network  
+
+volumes:
+  postgres-database-data-volume:
+
+networks:
+  global-api-marketplace-app-network:
