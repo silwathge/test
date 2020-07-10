@@ -1,4 +1,4 @@
-API Portal: Sample API Implementation
+<mark>API Portal: Sample API Implementation</mark>
 
 Sample Solution is available on AWS (EC2) as docker containers
 
