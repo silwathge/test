@@ -32,6 +32,7 @@ The zip file “PostmanScriptAndFilesToUpload.zip” will also available with so
 3. Default user in db 
 
 	 User : username
+	 
 	 Password: password
 
 
