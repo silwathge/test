@@ -18,9 +18,8 @@ http://ec2-13-229-60-201.ap-southeast-1.compute.amazonaws.com:8080/
 with other files used for uploadeding will be sent separately via email. The zip file “PostmanScriptAndFilesToUpload.zip” will also available with source code in the GitHub repo
 
 
-1 . Use environment variable 
+ 1. Use environment variable 
 “host”  with value ec2-13-229-60-201.ap-southeast-1.compute.amazonaws.com
-
 
 2. Place other files in the Postman working directory
 
