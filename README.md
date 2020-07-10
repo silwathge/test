@@ -1,4 +1,4 @@
-# API Portal: Sample API Implementation
+# API Portal: Sample API Implementation (For OpenAPI V3)
 
 ## Sample Solution is available on AWS (EC2) as docker containers
 
