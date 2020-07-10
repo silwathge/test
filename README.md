@@ -43,7 +43,7 @@ https://github.com/silwathge/101-digital-coding-challenge
 https://hub.docker.com/repository/docker/kapilas/global-api-marketplace-app
 
 
-kapilas/global-api-marketplace-app
+kapilas/global-api-marketplace-app:0.0.3-SNAPSHOT
 
 
 
