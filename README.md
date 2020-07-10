@@ -29,6 +29,12 @@ The zip file “PostmanScriptAndFilesToUpload.zip” will also available with so
 
 2. Place other files in the Postman working directory
 
+3. Default user in db 
+
+	 User : username
+	 Password: password
+
+
 
 
 
