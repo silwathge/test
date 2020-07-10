@@ -1,4 +1,5 @@
-API Portal: Sample API Implementation 
+API Portal: Sample API Implementation
+
 Sample Solution is available on AWS (EC2) as docker containers
 
 	App: global-api-marketplace-app
