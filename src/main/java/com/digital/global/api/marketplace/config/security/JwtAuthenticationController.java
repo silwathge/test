@@ -28,7 +28,7 @@ public class JwtAuthenticationController {
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
-			throws Exception {
+			throws BadCredentialsException, Exception {
 
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
@@ -47,10 +47,10 @@ public class JwtAuthenticationController {
 
 		} catch (DisabledException e) {
 
-			throw new Exception("USER_DISABLED", e);
+			throw new Exception("User is disabled", e);
 
 		} catch (BadCredentialsException e) {
-			throw new BadCredentialsException("INVALID_CREDENTIALS", e);
+			throw new BadCredentialsException("Invalid Credentials", e);
 		}
 	}
 }

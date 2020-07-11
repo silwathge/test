@@ -4,7 +4,6 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.digital.global.api.marketplace.entity.ApiDocument;
 import com.digital.global.api.marketplace.entity.PublisherUser;
+import com.digital.global.api.marketplace.exception.PublisherNotFoundException;
 import com.digital.global.api.marketplace.exception.UploadedFileFormatException;
 import com.digital.global.api.marketplace.service.ApiDocumentService;
 import com.digital.global.api.marketplace.service.FileHandlingService;
@@ -40,7 +40,7 @@ public class ApiResource {
 
 	public ResponseEntity<Object> createApi(@PathVariable String name,
 			@RequestParam("file") MultipartFile file)
-			throws UsernameNotFoundException, UploadedFileFormatException {
+			throws PublisherNotFoundException, UploadedFileFormatException {
 
 		String fileAsString = fileHandlingService.getFileAsString(file);
 
