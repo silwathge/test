@@ -11,11 +11,13 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
 import lombok.extern.slf4j.Slf4j;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @Slf4j
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.digital.global.api.marketplace")
+@EnableSwagger2
 public class GlobalApiMarketplaceApplication {
 
 	public static void main(String[] args) {
