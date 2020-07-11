@@ -19,7 +19,7 @@ public class PublisherService {
 
 		if (null == publisher) {
 
-			throw new PublisherNotFoundException("No Publisher by the given name 2");
+			throw new PublisherNotFoundException("No Publisher by the given name");
 
 		}
 

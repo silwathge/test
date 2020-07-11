@@ -106,10 +106,10 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
-		
+
 		<dependency>
-		   <groupId>com.fasterxml.jackson.datatype</groupId>
-		   <artifactId>jackson-datatype-jsr310</artifactId>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -184,7 +184,8 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin>
+<!-- 			
+			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
 				<version>1.4.10</version>
@@ -197,15 +198,30 @@
 					</execution>
 				</executions>
 				<configuration>
-					<repository>in28min/${project.name}</repository>
+					<repository>kapilas/${project.name}</repository>
 					<tag>${project.version}</tag>
 					<skipDockerInfo>true</skipDockerInfo>
 				</configuration>
-			</plugin> -->
-			<!-- <plugin> <groupId>com.google.cloud.tools</groupId> <artifactId>jib-maven-plugin</artifactId> 
-				<version>1.6.1</version> <configuration> <container> <creationTime>USE_CURRENT_TIMESTAMP</creationTime> 
-				</container> </configuration> <executions> <execution> <phase>package</phase> 
-				<goals> <goal>dockerBuild</goal> </goals> </execution> </executions> </plugin> -->
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>1.6.1</version>
+				<configuration>
+					<container>
+						<creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+					</container>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>dockerBuild</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
 		</plugins>
 	</build>
 

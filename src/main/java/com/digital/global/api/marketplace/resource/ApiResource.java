@@ -2,6 +2,8 @@ package com.digital.global.api.marketplace.resource;
 
 import java.net.URI;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,13 +40,13 @@ public class ApiResource {
 
 	@PostMapping(value = "/v1/publishers/{name}/apis", consumes = { "multipart/form-data" })
 
-	public ResponseEntity<Object> createApi(@PathVariable String name,
+	public ResponseEntity<Object> createApi(@PathVariable @NotBlank String name,
 			@RequestParam("file") MultipartFile file)
 			throws PublisherNotFoundException, UploadedFileFormatException {
 
-		String fileAsString = fileHandlingService.getFileAsString(file);
-
 		PublisherUser publisher = publisherService.findPublisherByname(name);
+
+		String fileAsString = fileHandlingService.getFileAsString(file);
 
 		ApiDocument savedDoc = apiDocumentService
 				.createApiDocument(new ApiDocument("developer", fileAsString, false, publisher));
