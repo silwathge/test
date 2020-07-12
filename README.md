@@ -78,6 +78,10 @@ http://ec2-13-229-60-201.ap-southeast-1.compute.amazonaws.com:8080/
 http://ec2-13-229-60-201.ap-southeast-1.compute.amazonaws.com:8080/v2/api-docs
 
 
+## Swagger UI :
+http://ec2-13-229-60-201.ap-southeast-1.compute.amazonaws.com:8080/swagger-ui.html
+
+
 ## Actuator (with default exposed endpoints)   :
 
 http://ec2-13-229-60-201.ap-southeast-1.compute.amazonaws.com:8080/actuator
